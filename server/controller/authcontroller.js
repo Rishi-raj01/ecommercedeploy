@@ -1,11 +1,11 @@
-const usermodel=require("../model/usermodel");
-const ordermodel=require("../model/ordermodel")
-const { sendMail } = require('../utility/nodemailer');
+const usermodel=require("../server/model/usermodel");
+const ordermodel=require("../server/model/ordermodel")
+const { sendMail } = require('../server/utility/nodemailer');
 //const { useAuth } =require("../client/src/context/auth");
 const jwt=require("jsonwebtoken")
 const jwt_key="hvvgdxrrdxffcygvvgc";
 const SendmailTransport =require("nodemailer/lib/sendmail-transport")
-const {hashPassword}=require("../helpers/authhelper")
+const {hashPassword}=require("../server/helpers/authhelper")
 //const [auth] = useAuth();
 module.exports.signup = async function signup(req, res) {
     try {

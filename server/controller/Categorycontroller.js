@@ -1,5 +1,5 @@
 const slugify = require("slugify");
-const categoryModel = require("../model/CategoryModel");
+const categoryModel = require("../server/model/CategoryModel");
 
 module.exports.createCategory = async function createCategory(req, res) {
   try {

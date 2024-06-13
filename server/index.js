@@ -1,9 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const authrouter = require("./router/authrouter.js");
-const categoryRouter=require("./router/categoryRouter.js")
-const productrouter = require("./router/productRoute.js");
+const authrouter = require("../router/authrouter.js");
+const categoryRouter=require("../router/categoryRouter.js")
+const productrouter = require("../router/productRoute.js");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 // Load environment variables
 dotenv.config();
 
-const connectToDatabase = require('./config/db.js');
+const connectToDatabase = require('../config/db.js');
 
 connectToDatabase();
 

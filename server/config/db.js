@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const usermodels=require('../model/usermodel')
+const usermodels=require('../server/model/usermodel')
 const db_link=  "mongodb+srv://rishirajjnvr448:Rishiraj2002@cluster1.sqbemgr.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster1";
 
 async function connectToDatabase() {

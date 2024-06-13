@@ -1,9 +1,9 @@
-const productmodel = require("../model/productmodel");
-const categorymodel=require("../model/CategoryModel")
+const productmodel = require("../server/model/productmodel");
+const categorymodel=require("../server/model/CategoryModel")
 const fs = require("fs");
 const slugify = require("slugify");
 var braintree = require("braintree");
-const ordermodel=require("../model/ordermodel")
+const ordermodel=require("../server/model/ordermodel")
 
 //payment gateway
 var gateway = new braintree.BraintreeGateway({
