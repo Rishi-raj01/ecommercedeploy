@@ -1,18 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
-const dotenv = require("dotenv");
-const authrouter = require("../router/authrouter.js");
-const categoryRouter=require("../router/categoryRouter.js")
-const productrouter = require("../router/productRoute.js");
+const path = require("path");
+const authrouter = require("./router/authrouter.js");
+const categoryRouter = require("./router/categoryRouter.js");
+const productrouter = require("./router/productRoute.js");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const PORT = process.env.PORT || 5000;
+const connectToDatabase = require('./config/db.js');
+const PORT = 5000;
 
-// Load environment variables
-dotenv.config();
-
-const connectToDatabase = require('../config/db.js');
-
+// Connect to the database
 connectToDatabase();
 
 const app = express();
@@ -21,18 +18,25 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
-//app.use(cors());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "*",
   credentials: true
 }));
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to ecommerce app</h1>");
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// API routes
+app.use("/user", authrouter);
+app.use("/category", categoryRouter);
+app.use("/product", productrouter);
+
+// All other GET requests not handled before will return the React app
+
+app.use("*", function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-app.use("/user", authrouter);
-app.use("/category",categoryRouter)
-app.use("/product",productrouter)
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
